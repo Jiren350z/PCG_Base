@@ -5,9 +5,9 @@ using UnityEngine;
 public class BinarySpacePartition : MonoBehaviour
 {
 
-    [Header("Dungeon Settings")]
-    public int dungeonWidth = 64;
-    public int dungeonHeight = 64;
+    [Header("Map Settings")]
+    public int mapWidth = 64;
+    public int mapHeight = 64;
     public int minPartitionSize = 16;
     public int maxIterations = 4;
 
@@ -45,16 +45,16 @@ public class BinarySpacePartition : MonoBehaviour
 
     void Start()
     {
-        GenerateDungeon();
+        GenerateMap();
     }
 
     /// <summary>
-    /// funcion que genera la dungeon
+    /// funcion que genera el mapa
     /// </summary>
-    void GenerateDungeon()
+    void GenerateMap()
     {
         //nodo raiz
-        rootNode = new Node(new RectInt(0, 0, dungeonWidth, dungeonHeight));
+        rootNode = new Node(new RectInt(0, 0, mapWidth, mapHeight));
 
         //division de area recursivamente
         SplitNode(rootNode, maxIterations);
@@ -185,7 +185,7 @@ public class BinarySpacePartition : MonoBehaviour
         if (!drawGizmos || rootNode == null) return;
 
         Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(new Vector3(dungeonWidth / 2f, 0, dungeonHeight / 2f), new Vector3(dungeonWidth, 0, dungeonHeight));
+        Gizmos.DrawWireCube(new Vector3(mapWidth / 2f, 0, mapHeight / 2f), new Vector3(mapWidth, 0, mapHeight));
 
         foreach (var leaf in leaves)
         {
