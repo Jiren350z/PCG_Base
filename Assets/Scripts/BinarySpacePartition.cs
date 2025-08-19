@@ -21,7 +21,9 @@ public class BinarySpacePartition : MonoBehaviour
     private Node rootNode;
     private List<Node> leaves = new List<Node>();
 
-    //clase para las particiones
+    /// <summary>
+    /// clase para las particiones
+    /// </summary>
     class Node
     {
         public RectInt area;
@@ -42,6 +44,9 @@ public class BinarySpacePartition : MonoBehaviour
         GenerateDungeon();
     }
 
+    /// <summary>
+    /// funcion que genera la dungeon
+    /// </summary>
     void GenerateDungeon()
     {
         //nodo raiz
@@ -57,6 +62,9 @@ public class BinarySpacePartition : MonoBehaviour
         ConnectRooms(rootNode);
     }
 
+    /// <summary>
+    /// clase encargada de hacer las divisiones tanto horizontales como verticales del espacio
+    /// </summary>
     void SplitNode(Node node, int iterations)
     {
         if (iterations <= 0 || node.area.width < minPartitionSize * 2 || node.area.height < minPartitionSize * 2)
@@ -84,6 +92,9 @@ public class BinarySpacePartition : MonoBehaviour
         SplitNode(node.right, iterations - 1);
     }
 
+    /// <summary>
+    /// funcion que cra las habitaciones
+    /// </summary>
     void CreateRooms(Node node)
     {
         if (node.IsLeaf())
@@ -102,6 +113,9 @@ public class BinarySpacePartition : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// conexion de habitaciones
+    /// </summary>
     void ConnectRooms(Node node)
     {
         if (node.left != null && node.right != null)
@@ -126,6 +140,9 @@ public class BinarySpacePartition : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// crea el inicio y el fin del camino
+    /// </summary>
     void CreateCorridor(Vector2Int start, Vector2Int end)
     {
         int xDir = start.x < end.x ? 1 : -1;
@@ -138,6 +155,9 @@ public class BinarySpacePartition : MonoBehaviour
             rootNode.corridor.Add(new Vector2Int(end.x, y));
     }
 
+    /// <summary>
+    /// obtiene el centro de la sala
+    /// </summary>
     Vector2Int GetRoomCenter(Node node)
     {
         if (node.IsLeaf() && node.room.HasValue)
@@ -150,6 +170,9 @@ public class BinarySpacePartition : MonoBehaviour
         return Vector2Int.zero;
     }
 
+    /// <summary>
+    /// dibuja el mapa usando gizmos
+    /// </summary>
     void OnDrawGizmos()
     {
         if (!drawGizmos || rootNode == null) return;
