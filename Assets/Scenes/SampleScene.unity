@@ -340,11 +340,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonWidth: 64
   dungeonHeight: 64
-  minPartitionSize: 16
+  minPartitionSize: 4
   maxIterations: 4
   minRoomSize: 4
   maxRoomSize: 12
   drawGizmos: 1
+  floorPrefab: {fileID: 2093732044649775773, guid: 28899520ef4268c4398f26a48181297d, type: 3}
+  wallPrefab: {fileID: 6231401393058136885, guid: 8e7c54a427d244349a01e64006f15f91, type: 3}
 --- !u!4 &1006518816
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,10 @@ public class BinarySpacePartition : MonoBehaviour
     [Header("Debug")]
     public bool drawGizmos = true;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject floorPrefab;
+    [SerializeField] private GameObject wallPrefab;
+
     private Node rootNode;
     private List<Node> leaves = new List<Node>();
 
@@ -60,6 +64,9 @@ public class BinarySpacePartition : MonoBehaviour
 
         //conectar habitaciones de corredores
         ConnectRooms(rootNode);
+
+        //construir el mapa
+        BuildMap();
     }
 
     /// <summary>
@@ -199,4 +206,44 @@ public class BinarySpacePartition : MonoBehaviour
             Gizmos.DrawCube(new Vector3(c.x, 0, c.y), Vector3.one * 0.5f);
     }
 
+    void BuildMap()
+    {
+        foreach (var leaf in leaves)
+        {
+            if(!leaf.room.HasValue) continue;
+            RectInt room = leaf.room.Value;
+
+            //Piso
+            for (int x = room.x; x < room.xMax; x++)
+                for (int y = room.y; y < room.yMax; y++)
+                    Instantiate(floorPrefab, new Vector3(x, 0, y), Quaternion.identity);
+
+            //Paredes horizontales
+            for(int x = room.x -1; x <= room.xMax; x++)
+            {
+                Instantiate(wallPrefab, new Vector3(x, 1, room.y-1), Quaternion.identity);
+                Instantiate(wallPrefab, new Vector3(x, 1, room.yMax), Quaternion.identity);
+            }
+
+            //Paredes verticales
+            for (int y = room.y - 1; y <= room.yMax; y++)
+            {
+                Instantiate(wallPrefab, new Vector3(room.x - 1, 1, y), Quaternion.identity);
+                Instantiate(wallPrefab, new Vector3(room.xMax, 1, y), Quaternion.identity);
+            }
+        }
+
+        //Corredores
+        DrawCorridor(rootNode);
+    }
+
+    void DrawCorridor(Node node)
+    {
+        if (node == null) return;
+        foreach (var c in node.corridor)
+            Instantiate(floorPrefab, new Vector3(c.x, 0, c.y), Quaternion.identity);
+
+        DrawCorridor(node.left);
+        DrawCorridor(node.right);
+    }
 }
