@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 341215592}
   - component: {fileID: 341215591}
   - component: {fileID: 341215590}
-  - component: {fileID: 341215589}
   - component: {fileID: 341215593}
   m_Layer: 0
   m_Name: Terrain
@@ -143,22 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &341215589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341215588}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27afc21079750a7468e33d69af0819d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 256
-  height: 256
-  depth: 30
-  scale: 20
 --- !u!154 &341215590
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -246,9 +229,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 513
-  height: 50
-  roughness: 0.6
-  initialRange: 30
+  height: 200
+  roughness: 0.5
+  initialRange: 50
 --- !u!1 &1034309194
 GameObject:
   m_ObjectHideFlags: 0
